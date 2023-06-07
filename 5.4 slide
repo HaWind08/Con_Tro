@@ -1,0 +1,73 @@
+#include<iostream>
+
+using namespace std;
+
+void Nhap(int *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		cout << "a["<<i<<"]= ";
+		cin >> *(a + i);
+	}
+}
+
+void Xuat(int *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+}
+
+void SaoChep(int *a, int n)
+{
+	int Dem_Chan = 0;
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) % 2 == 0) Dem_Chan++;
+	}
+	
+	int *b = new int[Dem_Chan];
+	int x = 0;
+	// sao chep cac phan tu le vao mang moi truoc
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) % 2 != 0)
+		{
+			*(b + x) = *(a + i);
+			x++;
+		}
+	} 
+	// sao chep cac phan tu chan vao cuoi mang
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) % 2 == 0)
+		{
+			*(b + x) = *(a + i);
+			x++;
+		}
+	} 
+	
+	cout << "Mang sau khi thay doi: " << endl;
+	Xuat(b,x);
+	
+	delete[] b;
+}
+
+int main()
+{
+	int n;
+	cout << "Nhap n: "; cin >> n;
+	
+	int *a = new int[n];
+	cout << "Nhap mang: " << endl;
+	Nhap(a,n);
+	cout << "Mang ban dau: " << endl;
+	Xuat(a,n);
+	
+	SaoChep(a,n);
+	
+	delete[] a;
+	return 0;
+}
