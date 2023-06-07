@@ -1,0 +1,61 @@
+#include<iostream>
+
+using namespace std;
+
+void input(int *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		cout << "a["<<i<<"]= ";
+		cin >> a[i];
+	}
+}
+
+void output(int *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		cout << a[i] << " ";	
+	}	
+} 
+
+void remove(int* &a, int &n, int x)
+{
+	// xoa phan tu trong mang
+	for(int i = x; i < n - 1;i++)
+	{
+		a[i] = a[i + 1];
+	}
+	
+	int *tmp_a = new int[n - 1];
+	// Copy cac phan tu mang cu sang mang moi
+	for(int i = 0; i < n - 1;i++)
+	{
+		tmp_a[i] = a[i];
+	}
+	
+	delete[] a;
+	a = tmp_a;
+	n--;
+	
+}
+
+int main()
+{
+	int n,x;
+	
+	cout << "Nhap n: "; cin >> n;
+	
+	int *a = new int[n];
+	cout << "Nhap mang: " << endl;
+	input(a,n);
+	
+	cout << "Nhap x: "; cin >> x;
+	remove(a,n,x);
+	
+	cout << "Mang sau khi xoa: " <<endl;
+	output(a,n);
+ 	
+ 	delete[] a;
+ 	return 0;
+} 
