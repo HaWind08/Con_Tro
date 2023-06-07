@@ -1,0 +1,65 @@
+#include<iostream>
+
+using namespace std;
+
+//Bài 1: Tao mang dong có n phan tu nguyên (toi da 10 phan tu). Nhap vào 1 so nguyên x và thêm x vào cuoi mang vua tao.
+
+void Input(int *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		cout << "a["<<i<<"]= ";
+		cin >> a[i];
+	}
+}
+
+void Output(int *a, int n)
+{
+	for(int i = 0; i < n; i++)
+	{
+		cout << a[i] << " ";
+	}
+}
+
+void Push(int* &a, int &n, int x)
+{
+	// Tao mang moi 
+	int *tmp_a = new int[n + 1];
+	
+	// Copy toan bo phan tu cu sang moi
+	for(int i = 0; i < n ; i++)
+	{
+		tmp_a[i] = a[i];
+	}
+	
+	// Them phan tu moi vao cuoi mang moi
+	tmp_a[n] = x;
+	
+	//Giai phong mang cu
+	delete[] a;
+	
+	//Cap nhat mang va so phan tu moi
+	a = tmp_a;
+	n++; // n = n + 1;
+	
+}
+
+int main()
+{
+	int n, x;
+	
+	cout << "Nhap n: "; cin >> n;
+	
+	int *a = new int[n];
+	cout << "Nhap mang: " << endl;
+	Input(a,n);
+	
+	cout << "Nhap x: "; cin >> x;
+	Push(a,n,x);
+	
+	cout << "Mang sau khi them: " << endl;
+	Output(a,n);
+	
+	delete[] a;
+	return 0;
+}
