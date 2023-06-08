@@ -1,0 +1,69 @@
+#include <iostream>
+using namespace std;
+
+void nhapMang(int *a, int n) {
+    for (int i = 0; i < n; i++) {
+    	cout << "a["<<i<<"]= ";
+        cin >> *(a + i);
+    }
+}
+
+void xuatMang(int *a, int n) {
+    for (int i = 0; i < n; i++) {
+        cout << *(a + i) << " ";
+    }
+    cout << endl;
+}
+
+void chenPhanTu(int *a, int &n, int x, int y) {
+    if (n >= 10) {
+        cout << "Khong the them phan tu vao mang. Mang da day." << endl;
+        return;
+    }
+
+    if (x < 0 || x > n) {
+        cout << "Vi tri chen khong hop le." << endl;
+        return;
+    }
+
+    // Doi cac phan tu tu vi tri x sang phai 1 don vi
+    for (int i = n; i > x; i--) {
+        *(a + i) = *(a + i - 1);
+    }
+
+    // Chen phan tu y vao vi tri x
+    *(a + x) = y;
+
+    // Tang kich thuoc mang len 1
+    n++;
+}
+
+int main() {
+    int n, x, y;
+    cout << "Nhap so phan tu cua mang (toi da 10): ";
+    cin >> n;
+
+    if (n < 1 || n > 10) {
+        cout << "So phan tu khong hop le." << endl;
+        return 0;
+    }
+
+    int *a = new int[n];
+    cout << "Nhap mang: " << endl;
+    nhapMang(a, n);
+
+    cout << "Nhap x (0 <= x <= " << n << "): ";cin >> x;
+
+    if (x < 0 || x > n) {
+        cout << "Vi tri chen khong hop le." << endl;
+        return 0;
+    }
+    cout << "Nhap so nguyen y: "; cin >> y;
+
+    chenPhanTu(a, n, x, y);
+    cout << "Mang sau khi them: " << endl;
+    xuatMang(a, n);
+
+    delete[] a;
+    return 0;
+}
