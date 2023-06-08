@@ -1,0 +1,77 @@
+#include<iostream>
+using namespace std;
+
+void Nhap(int *a, int n)
+{
+	for(int i = 0;i < n;i++)
+	{
+		cout << "a["<<i<<"]= ";
+		cin >> *(a + i);
+	}
+}
+
+void Xuat(int *a, int n)
+{
+	for(int i = 0;i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+}
+
+void Chen(int *a, int n)
+{
+	int x = 0, y = 0;
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) % 2 != 0) y++;	// Dem so le
+	}
+	
+	int *b = new int[y]; // Mang chua cac so le
+	int *c = new int[n + y]; // Mang gop a va b
+	
+	// sao chep so le tu mang a sang mang b
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) % 2 != 0)
+		{
+			*(b + x) = *(a + i);
+			x++; 
+		}
+	}
+	
+	// gop mang a vao mang c
+	for(int i = 0; i < n;i++)
+	{
+		*(c + i) = *(a + i);
+	}
+	
+	// gop mang b vao mang c
+	for(int i = 0; i < n;i++)
+	{
+		*(c + i + n) = *(b + i);
+	}
+	
+	cout << "Mang sau khi thay doi: " << endl;
+	Xuat(c, n + y);
+	delete[] b;
+	delete[] c;
+}
+
+int main()
+{
+	int n, *a;
+	
+	cout << "Nhap n: "; cin >> n;
+	
+	a = new int[n];
+	cout << "Nhap mang: " << endl;
+	Nhap(a,n);
+	cout << "Mang truoc khi thay doi: " << endl;
+	Xuat(a,n);
+	
+	Chen(a,n);
+	
+	delete[] a;
+	return 0; 
+}
