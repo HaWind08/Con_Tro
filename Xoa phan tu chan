@@ -1,0 +1,64 @@
+#include<iostream>
+using namespace std;
+
+void Nhap(int *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		cout << "a["<<i<<"]= ";
+		cin >> *(a + i);
+	}
+}
+
+void Xuat(int *a, int n)
+{
+	for(int i = 0; i < n;i++)
+	{
+		cout << *(a + i) << " ";
+	}
+	cout << endl;
+}
+
+void Remove(int *a, int &n)
+{
+	int count = 0;
+	for(int i = 0; i < n;i++)
+	{
+		if(*(a + i) % 2 != 0) count++;
+	}
+	
+	int *b = new int[count]; // tao moi mang le moi
+	int x = 0;
+	for(int i = 0; i < n; i++)
+	{
+		if(*(a + i) % 2 != 0)
+		{
+			*(b + x) = *(a + i);
+			x++;
+		}
+	}
+	
+	delete[] a;
+	a = b;
+	
+	cout << "Mang sau khi xoa: " << endl;
+	Xuat(b,x);
+}
+
+int main()
+{
+	int n, *a;
+	
+	cout << "Nhap n: "; cin >> n;
+	
+	a = new int[n];
+	cout << "Nhap mang: " << endl;
+	Nhap(a,n);
+	cout << "Mang truoc khi xoa: " << endl;
+	Xuat(a,n);
+	
+	Remove(a,n);
+	
+	delete[] a;
+	return 0;
+}
