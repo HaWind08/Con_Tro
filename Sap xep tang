@@ -1,0 +1,52 @@
+#include<iostream>
+using namespace std;
+
+void Nhap(int *a, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << "a[" << i << "]= ";
+		cin >> *(a + i);
+	}
+}
+
+void Xuat(int *a, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << *(a + i) << " ";
+		
+	}
+	cout << endl;
+}
+
+void Sap_Xep(int *a, int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (*(a + i) > *(a + j)) swap(*(a + i), *(a + j));
+		}
+	}
+}
+
+int main()
+{
+	int* a, n;
+
+	cout << "Nhap n: "; cin >> n;
+
+	a = new int[n];
+	cout << "Nhap mang: ";
+	Nhap(a, n);
+
+	Sap_Xep(a, n);
+
+	cout << "Mang sau khi sap xep: " << endl;
+	Xuat(a, n);
+
+	delete[] a;
+	return 0;
+}
+
